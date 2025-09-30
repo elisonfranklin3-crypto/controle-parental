@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Controle Parental Escolar</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(180deg, #eef2ff, #f9fafb);
+      color: #1f2937;
+      display: flex; min-height: 100vh;
+    }
+
+    /* MENU LATERAL */
+    nav {
+      width: 250px;
+      background: linear-gradient(180deg, #e1e0ef, #312e81);
+      color: #fff;
+      padding: 25px;
+      position: fixed;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    nav h2 {
+      font-size: 1.5rem;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    nav ul { list-style: none; flex: 1; }
+    nav li { margin: 15px 0; }
+    nav a {
+      color: #fff; text-decoration: none;
+      display: block; padding: 12px 15px;
+      border-radius: 10px; transition: 0.3s;
+      font-size: 1rem; font-weight: bold;
+    }
+    nav a:hover, nav a.active {
+      background: rgba(255,255,255,0.2);
+    }
+    footer {
+      font-size: 0.85rem; text-align: center;
+      margin-top: auto; opacity: 0.9;
+    }
+
+    /* CONTEÚDO PRINCIPAL */
+    main {
+      margin-left: 260px;
+      padding: 35px;
+      flex: 1;
+    }
+    header {
+      display: flex; justify-content: space-between;
+      align-items: center; margin-bottom: 25px;
+    }
+    header h1 { font-size: 1.6rem; }
+    .configs label {
+      margin-right: 15px;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    /* SEÇÕES */
+    section {
+      display: none;
+      padding: 25px;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      animation: fadeIn 0.4s ease;
+    }
+    section.active { display: block; }
+    h2 {
+      margin-bottom: 20px;
+      font-size: 1.4rem;
+      color: #4338ca;
+    }
+
+    /* CARDS */
+    .card {
+      background: #f9fafb;
+      padding: 18px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-3px); }
+
+    /* BOTÕES */
+    button {
+      margin-top: 10px; margin-right: 10px;
+      padding: 12px 18px;
+      border: none; border-radius: 12px;
+      cursor: pointer; font-weight: bold;
+      font-size: 0.95rem; transition: 0.3s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    button:hover { transform: scale(1.05); }
+    .btn-primary { background: #4f46e5; color: #fff; }
+    .btn-danger { background: #dc2626; color: #fff; }
+    .btn-green { background: #16a34a; color: #fff; }
+
+    /* ALTO CONTRASTE */
+    body.contraste { background: #000; color: #fff; }
+    body.contraste section { background: #111; color: #fff; }
+    body.contraste nav { background: #000; }
+
+    /* ANIMAÇÃO */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <!-- MENU LATERAL -->
+  <nav>
+    <h2>📚 Painel Escolar</h2>
+    <ul>
+      <li><a href="#inicio" class="active" onclick="mostrar('inicio', this)">🏠 Início</a></li>
+      <li><a href="#notas" onclick="mostrar('notas', this)">📊 Notas</a></li>
+      <li><a href="#eventos" onclick="mostrar('eventos', this)">📅 Eventos</a></li>
+      <li><a href="#ocorrencias" onclick="mostrar('ocorrencias', this)">⚠️ Ocorrências</a></li>
+      <li><a href="#professores" onclick="mostrar('professores', this)">👩‍🏫 Professores</a></li>
+      <li><a href="#pautas" onclick="mostrar('pautas', this)">📝 Pautas</a></li>
+      <li><a href="#feedbacks" onclick="mostrar('feedbacks', this)">💬 Feedbacks</a></li>
+      <li><a href="#libras" onclick="mostrar('libras', this)">🤟 Libras</a></li>
+    </ul>
+    <footer>© 2025 EP NEILYTA</footer>
+  </nav>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main>
+    <header>
+      <h1>Aluno(a): Emilly Mouta - 2º Ano ADM</h1>
+      <div class="configs">
+        <label><input type="checkbox" id="voz"> Leitura por voz</label>
+        <label><input type="checkbox" id="contraste"> Alto contraste</label>
+      </div>
+    </header>
+
+    <!-- INÍCIO -->
+    <section id="inicio" class="active">
+      <h2>Bem-vindo</h2>
+      <div class="card">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/65/Education_icon.png" alt="Logo da Escola" width="80">
+        <h3>EEEP Francisca Neilyta Carneiro Albuquerque</h3>
+        <p><b>Estado:</b> Ceará</p>
+        <p>Acompanhe o desempenho escolar, eventos, professores e mais.</p>
+        <button class="btn-green" onclick="lerTexto('Você está no painel inicial da escola EEEP Francisca Neilyta Carneiro Albuquerque, no estado do Ceará. Aqui pode acompanhar o desempenho escolar, eventos e professores.')">🔊 Ler esta seção</button>
+      </div>
+    </section>
+
+    <!-- NOTAS -->
+    <section id="notas">
+      <h2>Notas</h2>
+      <div class="card">📘 Matemática: 7,5</div>
+      <div class="card">📗 Português: 10,0</div>
+      <div class="card">📙 História: 8,0</div>
+      <div class="card">📕 Biologia: 6,5</div>
+      <div class="card">📘 Gestão de vendas: 9,0</div>
+      <div class="card">🌍 Geografia: 6,0</div>
+      <div class="card">💻 Economia: <b style="color:red;">5,0 (abaixo da média)</b></div>
+      <div class="card">⚽ Educação Física: 10,0</div>
+      <div class="card">🎨 Artes: 7,0</div>
+      <button class="btn-green" onclick="lerTexto('Notas da aluna: Matemática 7,5, Português 10, História 8, Biologia 6,5, Gestão de vendas 9, Geografia 6, Economia 5, Educação Física 10 e Artes 7.')">🔊 Ler esta seção</button>
+    </section>
+
+    <!-- EVENTOS -->
+    <section id="eventos">
+      <h2>Eventos</h2>
+      <div class="card">
+        Feira de Ciências - 15/10 às 09:00 <br>
+        <span id="presenca1">Confirmados: 0 | Faltas: 0</span><br>
+        <button class="btn-primary" onclick="confirmar(1, true)">✅ Confirmar</button>
+        <button class="btn-danger" onclick="confirmar(1, false)">❌ Não vou</button>
+        <button class="btn-green" onclick="falarEvento('Feira de Ciências', '15/10', '09:00', 1)">🔊 Ler evento</button>
+        <canvas id="grafico1" width="220" height="100"></canvas>
+      </div>
+      <div class="card">
+        Reunião de Pais - 10/11 às 18:30 <br>
+        <span id="presenca2">Confirmados: 0 | Faltas: 0</span><br>
+        <button class="btn-primary" onclick="confirmar(2, true)">✅ Confirmar</button>
+        <button class="btn-danger" onclick="confirmar(2, false)">❌ Não vou</button>
+        <button class="btn-green" onclick="falarEvento('Reunião de Pais', '10/11', '18:30', 2)">🔊 Ler evento</button>
+        <canvas id="grafico2" width="220" height="100"></canvas>
+      </div>
+      <div class="card">
+        Campeonato Interclasses - 20/11 às 14:00 <br>
+        <span id="presenca3">Confirmados: 0 | Faltas: 0</span><br>
+        <button class="btn-primary" onclick="confirmar(3, true)">✅ Confirmar</button>
+        <button class="btn-danger" onclick="confirmar(3, false)">❌ Não vou</button>
+        <button class="btn-green" onclick="falarEvento('Campeonato Interclasses', '20/11', '14:00', 3)">🔊 Ler evento</button>
+        <canvas id="grafico3" width="220" height="100"></canvas>
+      </div>
+      <div class="card">
+        Apresentação Cultural - 05/12 às 19:00 <br>
+        <span id="presenca4">Confirmados: 0 | Faltas: 0</span><br>
+        <button class="btn-primary" onclick="confirmar(4, true)">✅ Confirmar</button>
+        <button class="btn-danger" onclick="confirmar(4, false)">❌ Não vou</button>
+        <button class="btn-green" onclick="falarEvento('Apresentação Cultural', '05/12', '19:00', 4)">🔊 Ler evento</button>
+        <canvas id="grafico4" width="220" height="100"></canvas>
+      </div>
+    </section>
+
+    <!-- OCORRÊNCIAS -->
+    <section id="ocorrencias">
+      <h2>Ocorrências</h2>
+      <div class="card">⚠️ 12/09 - Conversa em sala durante explicação.</div>
+      <div class="card">✅ 15/09 - Ajudou os colegas nas atividades.</div>
+      <div class="card">✅ 27/09 - Foi escalada como monitora para o programa: Elas na matemática.</div>
+      <button class="btn-green" onclick="lerTexto('Ocorrências registradas: Conversa em sala durante explicação no dia 12 de setembro. Ajudou os colegas nas atividades no dia 15 de setembro. Foi escalada como monitora do programa Elas na Matemática em 27 de setembro.')">🔊 Ler esta seção</button>
+    </section>
+
+    <!-- PROFESSORES -->
+    <section id="professores">
+      <h2>Professores</h2>
+      <div class="card">
+        📘 Matemática - Prof. Tiago souza <br>
+        ✉️ tiago.souza@escola.edu.br
+      </div>
+      <div class="card">
+        📗 Português - Prof. Erika Marques <br>
+        ✉️ erika.marques@escola.edu.br
+      </div>
+      <div class="card">
+        📙 Espanhol - Prof. Eronildes Rocha <br>
+        ✉️ eronildes.rocha@escola.edu.br
+      </div>
+      <div class="card">
+        💻 Economia - Prof. Alex Barreto <br>
+        ✉️ alex.barreto@escola.edu.br
+      </div>
+      <button class="btn-green" onclick="lerTexto('Professores da turma: Matemática professora Ana Souza, Português professor Carlos Lima, História professora Beatriz Rocha e Informática professor Ricardo Alves.')">🔊 Ler esta seção</button>
+    </section>
+
+    <!-- PAUTAS -->
+    <section id="pautas">
+      <h2>Pautas discutidas</h2>
+      <div class="card">🍎 Melhoria no cardápio da merenda escolar</div>
+      <div class="card">🔬 Organização da feira de ciências</div>
+      <div class="card">📖 Projeto de leitura semanal</div>
+    <div class=>⚠️ Se quiser mandar uma pauta, enviar no email de um professor!!</div>
+      <button class="btn-green" onclick="lerTexto('Pautas discutidas: melhoria no cardápio da merenda escolar, organização da feira de ciências e projeto de leitura semanal.')">🔊 Ler esta seção</button>
+    </section>
+
+    <!-- FEEDBACKS -->
+    <section id="feedbacks">
+      <h2>Feedbacks</h2>
+
+      <div class="card">
+        <h3>🌟 Pontos Fortes</h3>
+        <ul>
+          <li>Participa ativamente nas aulas.</li>
+          <li>Boa comunicação com colegas e professores.</li>
+          <li>Organizada em trabalhos em grupo.</li>
+          <li>Excelente desempenho em Português e Educação Física.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>⚡ Pontos a Melhorar</h3>
+        <ul>
+          <li>Maior dedicação em Economia e Geografia.</li>
+          <li>Evitar conversas paralelas durante explicações.</li>
+          <li>Revisar conteúdos de Biologia para alcançar a média com folga.</li>
+        </ul>
+      </div>
+
+      <button class="btn-green" onclick="lerTexto('Pontos fortes: participação ativa nas aulas, boa comunicação, organização em trabalhos em grupo, ótimo desempenho em Português e Educação Física. Pontos a melhorar: maior dedicação em Economia e Geografia, evitar conversas em sala durante explicações e revisar conteúdos de Biologia.')">🔊 Ler esta seção</button>
+    </section>
+
+    <!-- LIBRAS -->
+    <section id="libras">
+      <h2>Apoio em Libras</h2>
+      <div class="card">
+        <p>Assista à tradução em Libras dos principais avisos:</p>
+        <img src=data:image/jpeg;base64,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
+             alt="Intérprete de Libras" width="260" style="border-radius:10px;">
+        <button class="btn-green" onclick="lerTexto('Esta seção apresenta apoio em Libras com intérprete para os principais avisos da escola.')">🔊 Ler esta seção</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- SCRIPT -->
+  <script>
+    let eventos = { 
+      1: { confirmados: 0, faltas: 0 }, 
+      2: { confirmados: 0, faltas: 0 },
+      3: { confirmados: 0, faltas: 0 },
+      4: { confirmados: 0, faltas: 0 }
+    };
+
+    function confirmar(id, presenca) {
+      if (presenca) eventos[id].confirmados++;
+      else eventos[id].faltas++;
+      atualizarPresenca(id);
+      desenharGrafico(id);
+    }
+
+    function atualizarPresenca(id) {
+      document.getElementById("presenca" + id).textContent =
+        "Confirmados: " + eventos[id].confirmados + " | Faltas: " + eventos[id].faltas;
+    }
+
+    function falarEvento(nome, data, hora, id) {
+      const vozAtiva = document.getElementById('voz').checked;
+      const info = eventos[id];
+      const texto = `${nome}, no dia ${data} às ${hora}. Confirmados: ${info.confirmados}, Faltas: ${info.faltas}.`;
+      if (vozAtiva) {
+        const u = new SpeechSynthesisUtterance(texto);
+        speechSynthesis.cancel();
+        speechSynthesis.speak(u);
+      } else {
+        alert("Ative 'Leitura por voz' no topo da página.");
+      }
+    }
+
+    function desenharGrafico(id) {
+      const canvas = document.getElementById("grafico" + id);
+      const ctx = canvas.getContext("2d");
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const total = eventos[id].confirmados + eventos[id].faltas;
+      if (total === 0) return;
+      const barWidth = 70;
+      ctx.fillStyle = "#4f46e5";
+      ctx.fillRect(40, canvas.height - eventos[id].confirmados * 20, barWidth, eventos[id].confirmados * 20);
+      ctx.fillStyle = "#dc2626";
+      ctx.fillRect(140, canvas.height - eventos[id].faltas * 20, barWidth, eventos[id].faltas * 20);
+      ctx.fillStyle = "#000";
+      ctx.fillText("✅", 60, canvas.height - 5);
+      ctx.fillText("❌", 165, canvas.height - 5);
+    }
+
+    function mostrar(secaoId, link) {
+      document.querySelectorAll("section").forEach(sec => sec.classList.remove("active"));
+      document.getElementById(secaoId).classList.add("active");
+      document.querySelectorAll("nav a").forEach(a => a.classList.remove("active"));
+      link.classList.add("active");
+    }
+
+    document.getElementById('contraste').addEventListener('change', (e) => {
+      document.body.classList.toggle('contraste', e.target.checked);
+    });
+
+    // Função de leitura geral
+    function lerTexto(texto) {
+      const vozAtiva = document.getElementById('voz').checked;
+      if (vozAtiva) {
+        const u = new SpeechSynthesisUtterance(texto);
+        speechSynthesis.cancel();
+        speechSynthesis.speak(u);
+      } else {
+        alert("Ative 'Leitura por voz' no topo daa página.");
+      }
+    }
+  </script>
+</body>
+</html>
